@@ -1,0 +1,5 @@
+# terraform.tfvars.example
+
+resource_group_name = "rg-devsecops-dev"
+location            = "East US"
+storage_account_name = "devsecopsstorage01"
