@@ -1,0 +1,5 @@
+
+# Control de revisores por módulo
+/terraform/* @carloscrudo @iac-team
+/.github/workflows/* @carloscrudo @devops-core
+/docs/* @carloscrudo
