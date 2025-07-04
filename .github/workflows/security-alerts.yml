@@ -1,0 +1,25 @@
+name: CodeQL Alert to Issue
+
+on:
+  workflow_run:
+    workflows: ["CodeQL"]
+    types:
+      - completed
+
+jobs:
+  create-issue-if-failed:
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Crear issue por falla en CodeQL
+        uses: dacbd/create-issue-action@v1
+        with:
+          title: "🚨 Falla en escaneo de seguridad (CodeQL)"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          body: |
+            El análisis de seguridad falló en el workflow `CodeQL`.
+
+            🔍 Ver detalles: [Ver ejecución](${{ github.event.workflow_run.html_url }})
+
+            Por favor revisar el pipeline y corregir los errores detectados.
+          labels: "security,automation"
