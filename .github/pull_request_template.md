@@ -1,3 +1,3 @@
-## Resumen del cambio propuesto
+## Resumen del cambio propuesto!
 
 Incluye explicación del impacto y pruebas.
