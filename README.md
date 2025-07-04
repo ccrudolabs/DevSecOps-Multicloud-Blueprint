@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # DevSecOps Multicloud Blueprint 🚀
 
@@ -27,3 +28,6 @@ docs/                -> Diagramas, documentación técnica
 
 ## 📚 Wiki
 La documentación completa se encuentra en la sección Wiki del repositorio.
+=======
+# DevSecOps-Multicloud-Blueprint
+>>>>>>> 54ee8d02aa8e25b31a07d7cd59307a06abcd51e1
