@@ -1,0 +1,12 @@
+name: 🐞 Reportar un bug
+description: Ayúdanos a mejorar informando un fallo
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: textarea
+    id: descripcion
+    attributes:
+      label: ¿Qué ocurrió?
+      placeholder: Describe el problema de forma clara
+    validations:
+      required: true
