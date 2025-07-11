@@ -73,3 +73,10 @@ Ver más en [`CONTRIBUTING.md`](CONTRIBUTING.md)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Contributors](https://img.shields.io/github/contributors/ccrudolabs/DevSecOps-Multicloud-Blueprint)
 ![Last Commit](https://img.shields.io/github/last-commit/ccrudolabs/DevSecOps-Multicloud-Blueprint)
+
+
+## 🧭 Documentación Extendida
+
+Puedes consultar detalles sobre la infraestructura AWS, Azure y scripts PowerShell en:
+
+👉 [`docs/blueprint-extension.md`](docs/blueprint-extension.md)
