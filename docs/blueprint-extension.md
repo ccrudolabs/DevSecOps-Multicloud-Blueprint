@@ -1,6 +1,6 @@
 # Documentación Extendida – Infraestructura y Scripts
 
-Este documento detalla la infraestructura definida en Terraform para AWS y Azure, así como los scripts PowerShell utilizados para consultar costos multicloud.
+Este documento detalla la infraestructura definida en Terraform para AWS, Azure y GCP, así como los scripts PowerShell utilizados para consultar costos multicloud.
 
 ---
 
@@ -46,6 +46,27 @@ terraform apply
 
 ---
 
+## ☁️ GCP – `iac/gcp/`
+
+Este módulo contiene definiciones de infraestructura para Google Cloud Platform utilizando Terraform.
+
+### Archivos incluidos:
+
+- `main.tf`: Configura el proveedor GCP.
+- `network.tf`: Crea una red VPC.
+- `iam.tf`: Asigna permisos IAM al proyecto.
+
+### Uso recomendado:
+
+```bash
+cd iac/gcp
+terraform init
+terraform plan
+terraform apply
+```
+
+---
+
 ## 📊 Scripts PowerShell – `scripts/`
 
 Scripts para consultar el uso y costos de cada proveedor cloud:
@@ -54,7 +75,7 @@ Scripts para consultar el uso y costos de cada proveedor cloud:
 
 - `get-costs-aws.ps1`: Consulta AWS Cost Explorer.
 - `get-costs-azure.ps1`: Consulta Azure Cost Management.
-- `get-costs-gcp.ps1`: Para BigQuery con exportación de billing.
+- `get-costs-gcp.ps1`: Genera datos para BigQuery billing export.
 
 ### Ejecución:
 
@@ -65,3 +86,24 @@ pwsh ./scripts/get-costs-gcp.ps1
 ```
 
 ---
+
+## 🗂️ Estructura del Repositorio (layout)
+
+```
+📦 DevSecOps-Multicloud-Blueprint/
+├── .github/
+│   └── workflows/
+│       ├── aws-costs.yml
+│       ├── azure-costs.yml
+│       └── gcp-costs.yml
+├── docs/
+│   └── blueprint-extension.md
+├── iac/
+│   ├── aws/
+│   ├── azure/
+│   └── gcp/
+├── scripts/
+│   ├── get-costs-aws.ps1
+│   ├── get-costs-azure.ps1
+│   └── get-costs-gcp.ps1
+```
