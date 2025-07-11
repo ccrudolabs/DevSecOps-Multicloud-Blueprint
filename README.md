@@ -15,6 +15,7 @@ Incluye controles de seguridad, cumplimiento, CI/CD seguro, scripts FinOps y doc
 - [📦 Infraestructura como Código](#-infraestructura-como-código)
 - [📈 FinOps y Reportes](#-finops-y-reportes)
 - [📁 Documentación Extendida](#-documentación-extendida)
+- [🛠️ Cómo empezar](#-cómo-empezar)
 
 ---
 
@@ -100,9 +101,32 @@ Dashboards recomendados: Azure Cost Management, AWS Budgets, Looker Studio
 
 Consulta más en:
 
-👉 [`docs/blueprint-extension.md`](docs/blueprint-extension.md)
-
+👉 [`docs/blueprint-extension.md`](docs/blueprint-extension.md)  
 👉 [Wiki Técnica Online](https://github.com/ccrudolabs/DevSecOps-Multicloud-Blueprint/wiki)
+
+---
+
+## 📘 Documentación visual
+
+Consulta el documento [`docs/layout.md`](docs/layout.md) para una explicación detallada de los diagramas:
+
+- Arquitectura multicloud
+- CI/CD + Seguridad
+- Layout DevSecOps
+
+También puedes ver los diagramas en línea desde la wiki o `docs/`.
+
+---
+
+## 🛠️ Cómo empezar
+
+Consulta [`bootstrap/README_BOOTSTRAP.md`](bootstrap/README_BOOTSTRAP.md) para iniciar el despliegue paso a paso.
+
+Puedes ejecutar el entorno desde cero usando:
+
+```powershell
+pwsh ./bootstrap/getting-started.ps1
+```
 
 ---
 
