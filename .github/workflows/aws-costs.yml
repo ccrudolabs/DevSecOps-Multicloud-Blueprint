@@ -1,0 +1,12 @@
+name: AWS Cost Report
+on:
+  workflow_dispatch:
+jobs:
+  aws-costs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Run AWS cost script
+        shell: pwsh
+        run: ./scripts/get-costs-aws.ps1
