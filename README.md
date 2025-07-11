@@ -4,6 +4,9 @@ Repositorio técnico y visual profesional para desplegar una arquitectura DevSec
 Incluye controles de seguridad, cumplimiento, CI/CD seguro, pruebas automatizadas, comunidad activa y documentación avanzada.
 
 ![Arquitectura](blueprint-architecture/diagram-devsecops-fintech.png)
+ Diagrama de arquitectura DevSecOps multicloud (AWS, Azure, GCP):
+
+![Arquitectura Multicloud](docs/architecture-multicloud.png)
 
 ---
 
