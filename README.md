@@ -37,6 +37,22 @@ Incluye controles de seguridad, cumplimiento, CI/CD seguro, pruebas automatizada
 
 ---
 
+## 📊 Diagramas de Arquitectura Multicloud
+
+A continuación se presentan los diagramas de referencia del blueprint:
+
+### 🧭 Layout DevSecOps Integrado
+![Layout DevSecOps](docs/layout-multicloud-devsecops.png)
+
+### 🔁 CI/CD + Seguridad + Integración Multicloud
+![CI/CD Multicloud](docs/layout-multicloud-ci-cd.png)
+
+### 🗺️ Arquitectura General Multicloud
+![Arquitectura Multicloud](docs/architecture-multicloud.png)
+
+Consulta la [documentación extendida en blueprint-extension.md](docs/blueprint-extension.md) para más detalles técnicos.
+
+---
 ## 📊 Actividad e Insights
 
 - GitHub Actions: Validación automática de código seguro
