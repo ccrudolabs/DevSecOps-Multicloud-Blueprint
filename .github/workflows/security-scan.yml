@@ -1,0 +1,9 @@
+name: Security Scan
+on: [push]
+jobs:
+  tfsec:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run tfsec
+        uses: aquasecurity/tfsec-action@v1.0.0
