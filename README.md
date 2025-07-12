@@ -1,3 +1,4 @@
+
 # DevSecOps-Multicloud-Blueprint 🚀
 ![Version](https://img.shields.io/badge/version-v1.0.0-blue)
 
@@ -32,6 +33,34 @@ Incluye controles de seguridad, cumplimiento, CI/CD seguro, pruebas automatizada
 - ✅ Análisis de código (Semgrep), contenedores (Trivy)
 - ✅ Seguridad por capas: HTTPS, mTLS, Vault/KMS, SIEM
 - ✅ Cumplimiento: PCI DSS, ISO 27001, SOC 2
+
+---
+
+## 🤖 Integración de GitHub Copilot en Entornos Multicloud (Azure, AWS, GCP)
+
+![Arquitectura Copilot](docs/diagramas/layout-copilot-devsecops.png)
+
+Este repositorio incorpora una estrategia avanzada para la adopción de **GitHub Copilot** como motor de productividad y asistencia en desarrollo seguro dentro de un entorno **DevSecOps multicloud**, compatible con:
+
+- 🔄 GitHub Actions como plataforma unificada de CI/CD
+- 🔐 Seguridad reforzada vía OIDC (Azure AD, AWS IAM, GCP Identity Federation)
+- 🧱 Infraestructura como Código con **Bicep**, **Terraform**, **CDK**
+- 🚧 Control de ramas por ambiente:
+  - `develop` → Desarrollo (Dev)
+  - `qa` → Aseguramiento (QA)
+  - `main` → Producción (PRD)
+
+📘 Ver la guía técnica: [`copilot-integracion-multicloud.md`](docs/desarrollo/copilot-integracion-multicloud.md)
+
+📁 Ejemplos disponibles por proveedor:
+
+| 🌐 Cloud | IaC | CI/CD Workflow |
+|----------|-----|----------------|
+| **Azure** | [`azure-storage.bicep`](docs/desarrollo/ejemplos/azure-storage.bicep) | [`azure-deploy.yml`](docs/desarrollo/ejemplos/github-actions/azure-deploy.yml) |
+| **AWS**   | [`aws-s3-policy.tf`](docs/desarrollo/ejemplos/aws-s3-policy.tf)       | [`aws-deploy.yml`](docs/desarrollo/ejemplos/github-actions/aws-deploy.yml)     |
+| **GCP**   | [`gcp-storage-bucket.tf`](docs/desarrollo/ejemplos/gcp-storage-bucket.tf) | [`gcp-deploy.yml`](docs/desarrollo/ejemplos/github-actions/gcp-deploy.yml)     |
+
+📌 Este enfoque refuerza las prácticas DevSecOps modernas con control de código, despliegue seguro y gobernanza unificada multicloud.
 
 ---
 
@@ -71,3 +100,6 @@ Ver más en [`CONTRIBUTING.md`](CONTRIBUTING.md)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Contributors](https://img.shields.io/github/contributors/ccrudolabs/DevSecOps-Multicloud-Blueprint)
 ![Last Commit](https://img.shields.io/github/last-commit/ccrudolabs/DevSecOps-Multicloud-Blueprint)
+
+✍️ Autor: **Carlos Crudo**  
+🔒 Marca Registrada: **CloudSolutionsIoT® – 2025**
