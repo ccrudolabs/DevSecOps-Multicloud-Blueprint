@@ -1,0 +1,19 @@
+name: Azure Deploy
+
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Deploy Bicep
+      run: |
+        az deployment group create \
+          --resource-group my-rg \
+          --template-file docs/desarrollo/ejemplos/azure-storage.bicep
