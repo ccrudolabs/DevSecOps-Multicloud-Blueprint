@@ -1,4 +1,5 @@
 # DevSecOps-Multicloud-Blueprint 🚀
+![Version](https://img.shields.io/badge/version-v1.0.0-blue)
 
 Repositorio técnico y visual profesional para desplegar una arquitectura DevSecOps multicloud enfocada en entornos Fintech.  
 Incluye controles de seguridad, cumplimiento, CI/CD seguro, pruebas automatizadas, comunidad activa y documentación avanzada.
