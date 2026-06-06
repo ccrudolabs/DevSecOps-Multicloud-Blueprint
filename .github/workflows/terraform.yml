@@ -16,34 +16,43 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Detect Terraform files
-        id: tf_files
+      - name: Detect changed Terraform files
+        id: tf_changes
         shell: bash
         run: |
-          if find . -type f -name "*.tf" | grep -q .; then
-            echo "found=true" >> "$GITHUB_OUTPUT"
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+            HEAD_SHA="${{ github.event.pull_request.head.sha }}"
           else
-            echo "found=false" >> "$GITHUB_OUTPUT"
-            echo "No Terraform files found. Skipping Terraform validation for this change."
+            BASE_SHA="${{ github.event.before }}"
+            HEAD_SHA="${{ github.sha }}"
+          fi
+
+          echo "Checking Terraform changes between $BASE_SHA and $HEAD_SHA"
+          CHANGED_TF_FILES=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" -- '*.tf' || true)
+
+          if [ -n "$CHANGED_TF_FILES" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Changed Terraform files:"
+            echo "$CHANGED_TF_FILES"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No Terraform files changed. Skipping Terraform validation for this documentation-only change."
           fi
 
       - name: Setup Terraform
-        if: steps.tf_files.outputs.found == 'true'
+        if: steps.tf_changes.outputs.changed == 'true'
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Format
-        if: steps.tf_files.outputs.found == 'true'
+        if: steps.tf_changes.outputs.changed == 'true'
         run: terraform fmt -check -recursive
 
-      - name: Terraform Init
-        if: steps.tf_files.outputs.found == 'true'
-        run: terraform init
-
-      - name: Terraform Validate
-        if: steps.tf_files.outputs.found == 'true'
-        run: terraform validate
-
-      - name: Terraform Plan
-        if: steps.tf_files.outputs.found == 'true'
-        run: terraform plan -out=tfplan
+      - name: Terraform Validate Notice
+        if: steps.tf_changes.outputs.changed == 'true'
+        run: |
+          echo "Terraform files changed. Run module-specific init/validate/plan in a follow-up workflow configured per Terraform root module."
+          echo "This repository currently stores Terraform examples across folders, not a single root module."
