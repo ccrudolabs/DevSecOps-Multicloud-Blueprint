@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DevSecOps Multicloud Blueprint | Carlos Crudo</title>
+    <meta
+      name="description"
+      content="Blueprint profesional de arquitectura DevSecOps multicloud con foco en seguridad, cumplimiento, CI/CD e infraestructura como codigo."
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f5f7fb;
+        --ink: #0b1f33;
+        --muted: #52627a;
+        --line: #d9e2ef;
+        --brand: #0f766e;
+        --brand-dark: #0b4f4a;
+        --panel: #ffffff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+        line-height: 1.6;
+      }
+
+      main {
+        min-height: 100vh;
+      }
+
+      .hero {
+        background: #081827;
+        color: #ffffff;
+        padding: 72px 24px 56px;
+      }
+
+      .wrap {
+        width: min(1120px, 100%);
+        margin: 0 auto;
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: #88f0e6;
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 900px;
+        margin: 0;
+        font-size: clamp(2.3rem, 5vw, 4.8rem);
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 780px;
+        margin: 22px 0 0;
+        color: #d8e4f2;
+        font-size: 1.15rem;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 30px;
+      }
+
+      a.button {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 18px;
+        border-radius: 6px;
+        color: #05221f;
+        background: #8cf5ea;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      a.button.secondary {
+        color: #ffffff;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+      }
+
+      .section {
+        padding: 44px 24px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+      }
+
+      .card {
+        min-height: 180px;
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+
+      .card h2 {
+        margin: 0 0 10px;
+        font-size: 1.05rem;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .note {
+        margin-top: 28px;
+        padding: 18px 20px;
+        border-left: 4px solid var(--brand);
+        background: #eaf7f5;
+        color: var(--brand-dark);
+      }
+
+      footer {
+        padding: 28px 24px 40px;
+        color: var(--muted);
+        border-top: 1px solid var(--line);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <div class="wrap">
+          <p class="eyebrow">DevSecOps Multicloud Blueprint</p>
+          <h1>Arquitectura segura para operar infraestructura multicloud con criterio enterprise.</h1>
+          <p class="lead">
+            Repositorio de referencia para organizar controles de seguridad, cumplimiento, CI/CD, IAM,
+            documentacion tecnica y gobierno operativo en entornos Azure, AWS y GCP.
+          </p>
+          <div class="actions" aria-label="Enlaces principales">
+            <a class="button" href="../">Ver repositorio</a>
+            <a class="button secondary" href="https://carloscrudo.com/">Blog de Carlos Crudo</a>
+            <a class="button secondary" href="https://www.linkedin.com/in/carloscrudo/">LinkedIn</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <div class="grid">
+            <article class="card">
+              <h2>Gobernanza de repositorio</h2>
+              <p>Ramas protegidas, pull requests, checks obligatorios, conversaciones resueltas y control de cambios.</p>
+            </article>
+            <article class="card">
+              <h2>Seguridad por capas</h2>
+              <p>Controles de codigo, secretos, IAM, cumplimiento, pruebas y trazabilidad para escenarios regulados.</p>
+            </article>
+            <article class="card">
+              <h2>CI/CD e IaC</h2>
+              <p>Validacion de Terraform y estructura preparada para evolucionar hacia pipelines por modulo.</p>
+            </article>
+            <article class="card">
+              <h2>Multicloud operativo</h2>
+              <p>Blueprint conceptual para Azure, AWS y GCP con separacion de entornos Dev, QA y Produccion.</p>
+            </article>
+          </div>
+          <div class="note">
+            Este sitio funciona como entrada publica del repositorio. La documentacion principal y los artefactos tecnicos se mantienen versionados en GitHub.
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="wrap">Autor: Carlos Crudo. Material tecnico de estudio y referencia profesional.</div>
+    </footer>
+  </body>
+</html>
