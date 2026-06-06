@@ -1,16 +1,24 @@
 # Terraform
-*.tfstate
-*.tfstate.backup
 .terraform/
-terraform.tfvars
+*.tfstate
+*.tfstate.*
+*.tfvars
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
 
-# Logs
-*.log
-
-# Archivos sensibles
+# Secrets
 .env
-secrets.*
+*.pem
+*.key
+*.pfx
+*.cer
+secrets.json
+appsettings.*.json
 
-# Sistema
+# OS / IDE
+.vscode/
 .DS_Store
 Thumbs.db
