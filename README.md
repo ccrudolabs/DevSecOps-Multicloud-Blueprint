@@ -1,37 +1,33 @@
-# DevSecOps Multicloud Blueprint 🚀
+# DevSecOps Multicloud Blueprint
 
-Repositorio técnico y visual profesional para desplegar una arquitectura DevSecOps multicloud enfocada en entornos Fintech.  
-Incluye controles de seguridad, cumplimiento, CI/CD seguro, scripts FinOps y documentación avanzada para AWS, Azure y GCP.
+Blueprint tecnico y visual para disenar, validar y documentar una arquitectura DevSecOps multicloud con foco en seguridad, cumplimiento, CI/CD, FinOps, control de cambios y gobierno operativo.
 
----
+Este repositorio funciona como laboratorio enterprise para AWS, Azure y GCP. La rama `develop` conserva el trabajo de evolucion tecnica, bootstrap, diagramas, scripts FinOps y validaciones antes de promover cambios a `qa` y `main`.
 
-## 📚 Tabla de Contenidos
+## Tabla de contenidos
 
-- [📐 Arquitectura General](#-arquitectura-general)
-- [📊 Diagramas Visuales](#-diagramas-visuales)
-- [🧩 Entornos: Dev, QA, Prod](#-entornos-dev-qa-prod)
-- [🔐 Seguridad DevSecOps](#-seguridad-devsecops)
-- [🛠️ CI/CD GitHub Actions](#️-cicd-github-actions)
-- [📦 Infraestructura como Código](#-infraestructura-como-código)
-- [📈 FinOps y Reportes](#-finops-y-reportes)
-- [📁 Documentación Extendida](#-documentación-extendida)
-- [🛠️ Cómo empezar](#-cómo-empezar)
+- [Arquitectura general](#arquitectura-general)
+- [Diagramas visuales](#diagramas-visuales)
+- [Entornos: develop, qa, main](#entornos-develop-qa-main)
+- [Seguridad DevSecOps](#seguridad-devsecops)
+- [CI/CD GitHub Actions](#cicd-github-actions)
+- [Infraestructura como codigo](#infraestructura-como-codigo)
+- [FinOps y reportes](#finops-y-reportes)
+- [Documentacion extendida](#documentacion-extendida)
+- [Como empezar](#como-empezar)
+- [Gobierno del repositorio](#gobierno-del-repositorio)
 
----
+## Arquitectura general
 
-## 📐 Arquitectura General
+Este blueprint cubre una arquitectura multicloud para entornos criticos:
 
-Este blueprint cubre una arquitectura multicloud para entornos críticos:
+- AWS: VPC, IAM, EC2, Cost Explorer.
+- Azure: VNet, App Service, Key Vault, Monitor.
+- GCP: VPC, IAM, Compute, Billing via BigQuery.
+- CI/CD centralizado con GitHub Actions.
+- Seguridad integrada con controles de codigo, infraestructura, contenedores y secretos.
 
-- AWS: VPC, IAM, EC2, Cost Explorer
-- Azure: VNet, App Service, Key Vault, Monitor
-- GCP: VPC, IAM, Compute, Billing via BigQuery
-- CI/CD centralizado con GitHub Actions
-- Seguridad integrada (CodeQL, tfsec, Trivy)
-
----
-
-## 📊 Diagramas Visuales
+## Diagramas visuales
 
 ![DevSecOps Layout](docs/layout-multicloud-devsecops.png)
 
@@ -39,51 +35,45 @@ Este blueprint cubre una arquitectura multicloud para entornos críticos:
 
 ![Arquitectura Multicloud](docs/architecture-multicloud.png)
 
----
+## Entornos: develop, qa, main
 
-## 🧩 Entornos: Dev, QA, Prod
+El repositorio esta preparado para separar entornos mediante ramas protegidas:
 
-El repositorio está preparado para separar entornos mediante:
+| Rama | Proposito | Criterio recomendado |
+| --- | --- | --- |
+| `develop` | Integracion tecnica y evolucion del blueprint | PR obligatorio, checks activos, sin force push |
+| `qa` | Validacion previa a main | PR obligatorio, checks estrictos, trazabilidad |
+| `main` | Version estable y portfolio publico | PR obligatorio, checks estrictos, conversaciones resueltas |
 
-- Módulos independientes por ambiente
-- Variables `terraform.tfvars`
-- Branches protegidas: `develop`, `qa`, `main`
+## Seguridad DevSecOps
 
----
+- Code scanning y revision de codigo.
+- Infra scanning con herramientas como tfsec o Checkov cuando aplique.
+- Container scanning con Trivy cuando existan imagenes o Dockerfiles.
+- Secret management con Key Vault, Secret Manager o mecanismos equivalentes.
+- GitHub Advanced Security si esta habilitado.
+- Politicas de ramas, pull requests y trazabilidad.
 
-## 🔐 Seguridad DevSecOps
-
-- Code Scanning: CodeQL, Semgrep
-- Infra Scanning: tfsec, Checkov
-- Container Scanning: Trivy
-- Secrets controlados con Key Vault / Secret Manager
-- GitHub Advanced Security (si está habilitado)
-
----
-
-## 🛠️ CI/CD GitHub Actions
+## CI/CD GitHub Actions
 
 Ejecutores automatizados por entorno y nube:
 
-- Workflows en `.github/workflows/`
-- Despliegue modular (`terraform init/plan/apply`)
-- Validaciones de seguridad embebidas
-- Aprobaciones mínimas requeridas
+- Workflows en `.github/workflows/`.
+- Validacion Terraform condicional por cambios `.tf`.
+- Evita `terraform plan` desde la raiz cuando el repositorio contiene multiples modulos o ejemplos.
+- Checks obligatorios alineados a workflows reales.
+- Aprobaciones y Code Owners solo cuando exista equipo/revisor valido.
 
----
-
-## 📦 Infraestructura como Código
+## Infraestructura como codigo
 
 Directorio `iac/` con:
 
-- `aws/` – Terraform: VPC, IAM, instancias
-- `azure/` – Terraform: VNet, RBAC
-- `gcp/` – Terraform: red, IAM
-- `scripts/` – PowerShell: costos multicloud
+- `aws/` - Terraform: VPC, IAM, instancias.
+- `azure/` - Terraform: VNet, RBAC.
+- `gcp/` - Terraform: red, IAM.
+- `scripts/` - PowerShell: costos multicloud.
 
----
-
-## 📈 FinOps y Reportes
+## FinOps y reportes
 
 Scripts disponibles en `/scripts/`:
 
@@ -93,32 +83,21 @@ pwsh ./scripts/get-costs-azure.ps1
 pwsh ./scripts/get-costs-gcp.ps1
 ```
 
-Dashboards recomendados: Azure Cost Management, AWS Budgets, Looker Studio
+Dashboards recomendados: Azure Cost Management, AWS Budgets, Looker Studio.
 
----
+## Documentacion extendida
 
-## 📁 Documentación Extendida
+- [`docs/blueprint-extension.md`](docs/blueprint-extension.md)
+- [Wiki tecnica online](https://github.com/ccrudolabs/DevSecOps-Multicloud-Blueprint/wiki)
+- [`docs/layout.md`](docs/layout.md)
 
-Consulta más en:
+La documentacion visual cubre:
 
-👉 [`docs/blueprint-extension.md`](docs/blueprint-extension.md)  
-👉 [Wiki Técnica Online](https://github.com/ccrudolabs/DevSecOps-Multicloud-Blueprint/wiki)
+- Arquitectura multicloud.
+- CI/CD + seguridad.
+- Layout DevSecOps.
 
----
-
-## 📘 Documentación visual
-
-Consulta el documento [`docs/layout.md`](docs/layout.md) para una explicación detallada de los diagramas:
-
-- Arquitectura multicloud
-- CI/CD + Seguridad
-- Layout DevSecOps
-
-También puedes ver los diagramas en línea desde la wiki o `docs/`.
-
----
-
-## 🛠️ Cómo empezar
+## Como empezar
 
 Consulta [`bootstrap/README_BOOTSTRAP.md`](bootstrap/README_BOOTSTRAP.md) para iniciar el despliegue paso a paso.
 
@@ -128,6 +107,14 @@ Puedes ejecutar el entorno desde cero usando:
 pwsh ./bootstrap/getting-started.ps1
 ```
 
----
+## Gobierno del repositorio
 
-**© Carlos Crudo 2025 – Cloud Solutions IoT®**
+- [Security Policy](SECURITY.md)
+- [Contributing](CONTRIBUTING.md)
+- [License](LICENSE)
+
+## Autor
+
+Carlos Crudo  
+Blog: https://carloscrudo.com/  
+LinkedIn: https://www.linkedin.com/in/carloscrudo/
