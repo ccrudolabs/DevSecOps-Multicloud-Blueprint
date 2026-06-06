@@ -1,16 +1,44 @@
 # Terraform
-*.tfstate
-*.tfstate.backup
 .terraform/
-terraform.tfvars
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl
+
+# Secrets
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+*.p12
+*.cer
+*.crt
+*.kubeconfig
+secrets.json
+appsettings.*.json
+azureProfile.json
+accessTokens.json
+
+# Cloud credentials
+.aws/
+.azure/
+.gcloud/
+
+# OS / IDE
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
 
 # Logs
 *.log
-
-# Archivos sensibles
-.env
-secrets.*
-
-# Sistema
-.DS_Store
-Thumbs.db
+logs/
