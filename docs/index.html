@@ -6,185 +6,595 @@
     <title>DevSecOps Multicloud Blueprint | Carlos Crudo</title>
     <meta
       name="description"
-      content="Blueprint profesional de arquitectura DevSecOps multicloud con foco en seguridad, cumplimiento, CI/CD e infraestructura como codigo."
+      content="Blueprint profesional para gobierno DevSecOps multicloud: seguridad, cumplimiento, CI/CD, IaC, ramas protegidas y operacion enterprise."
     />
     <style>
       :root {
         color-scheme: light;
-        --bg: #f5f7fb;
         --ink: #0b1f33;
-        --muted: #52627a;
-        --line: #d9e2ef;
-        --brand: #0f766e;
-        --brand-dark: #0b4f4a;
+        --muted: #4f5f73;
+        --soft: #eef5f8;
         --panel: #ffffff;
+        --line: #d9e5ee;
+        --navy: #071827;
+        --navy-2: #0d2a42;
+        --teal: #0f766e;
+        --teal-2: #8cf5ea;
+        --blue: #2563eb;
+        --amber: #b7791f;
       }
 
       * {
         box-sizing: border-box;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         margin: 0;
         font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
         color: var(--ink);
-        background: var(--bg);
+        background: #f7fafc;
         line-height: 1.6;
       }
 
-      main {
-        min-height: 100vh;
-      }
-
-      .hero {
-        background: #081827;
-        color: #ffffff;
-        padding: 72px 24px 56px;
+      a {
+        color: inherit;
       }
 
       .wrap {
-        width: min(1120px, 100%);
+        width: min(1180px, calc(100% - 40px));
         margin: 0 auto;
       }
 
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(255, 255, 255, 0.94);
+        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(12px);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 64px;
+        gap: 20px;
+      }
+
+      .brand {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        text-decoration: none;
+      }
+
+      .brand strong {
+        font-size: 0.98rem;
+      }
+
+      .brand span {
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .navlinks {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .navlinks a {
+        padding: 9px 12px;
+        border-radius: 6px;
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .navlinks a.primary {
+        color: #05221f;
+        background: var(--teal-2);
+      }
+
+      .hero {
+        background:
+          linear-gradient(135deg, rgba(7, 24, 39, 0.96), rgba(13, 42, 66, 0.94)),
+          radial-gradient(circle at 80% 20%, rgba(140, 245, 234, 0.22), transparent 32%);
+        color: #ffffff;
+        padding: 78px 0 54px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+        gap: 34px;
+        align-items: center;
+      }
+
       .eyebrow {
-        margin: 0 0 12px;
-        color: #88f0e6;
-        font-size: 0.82rem;
-        font-weight: 800;
+        margin: 0 0 14px;
+        color: var(--teal-2);
+        font-size: 0.78rem;
+        font-weight: 900;
         letter-spacing: 0.08em;
         text-transform: uppercase;
       }
 
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
       h1 {
-        max-width: 900px;
-        margin: 0;
-        font-size: clamp(2.3rem, 5vw, 4.8rem);
-        line-height: 1.04;
+        max-width: 880px;
+        margin-bottom: 20px;
+        font-size: clamp(2.35rem, 5vw, 4.9rem);
+        line-height: 1.02;
         letter-spacing: 0;
       }
 
       .lead {
-        max-width: 780px;
-        margin: 22px 0 0;
-        color: #d8e4f2;
-        font-size: 1.15rem;
+        max-width: 800px;
+        margin-bottom: 28px;
+        color: #dbe8f3;
+        font-size: 1.13rem;
       }
 
       .actions {
         display: flex;
         flex-wrap: wrap;
         gap: 12px;
-        margin-top: 30px;
       }
 
-      a.button {
+      .button {
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         min-height: 44px;
         padding: 0 18px;
         border-radius: 6px;
-        color: #05221f;
-        background: #8cf5ea;
-        font-weight: 800;
+        font-weight: 900;
         text-decoration: none;
       }
 
-      a.button.secondary {
+      .button.primary {
+        color: #05221f;
+        background: var(--teal-2);
+      }
+
+      .button.secondary {
         color: #ffffff;
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.32);
+      }
+
+      .status-panel {
+        padding: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .status-panel h2 {
+        margin-bottom: 16px;
+        font-size: 1.1rem;
+      }
+
+      .status-list {
+        display: grid;
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .status-list li {
+        display: flex;
+        gap: 10px;
+        color: #edf7fb;
+      }
+
+      .check {
+        flex: 0 0 auto;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        color: #05221f;
+        background: var(--teal-2);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        font-weight: 900;
       }
 
       .section {
-        padding: 44px 24px;
+        padding: 58px 0;
+      }
+
+      .section.alt {
+        background: var(--soft);
+      }
+
+      .section-head {
+        max-width: 780px;
+        margin-bottom: 28px;
+      }
+
+      .section-head h2 {
+        margin-bottom: 10px;
+        font-size: clamp(1.8rem, 3vw, 2.8rem);
+        line-height: 1.1;
+        letter-spacing: 0;
+      }
+
+      .section-head p {
+        color: var(--muted);
+        font-size: 1.03rem;
       }
 
       .grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 16px;
       }
 
-      .card {
-        min-height: 180px;
-        padding: 22px;
+      .card,
+      .wide-card {
         border: 1px solid var(--line);
         border-radius: 8px;
         background: var(--panel);
       }
 
-      .card h2 {
-        margin: 0 0 10px;
-        font-size: 1.05rem;
+      .card {
+        min-height: 210px;
+        padding: 22px;
       }
 
-      .card p {
-        margin: 0;
+      .card .num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        margin-bottom: 16px;
+        border-radius: 6px;
+        color: #ffffff;
+        background: var(--navy-2);
+        font-weight: 900;
+      }
+
+      .card h3 {
+        margin-bottom: 8px;
+        font-size: 1.1rem;
+      }
+
+      .card p,
+      .wide-card p,
+      .wide-card li {
         color: var(--muted);
       }
 
-      .note {
-        margin-top: 28px;
-        padding: 18px 20px;
-        border-left: 4px solid var(--brand);
-        background: #eaf7f5;
-        color: var(--brand-dark);
+      .two-col {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 18px;
       }
 
-      footer {
-        padding: 28px 24px 40px;
+      .wide-card {
+        padding: 24px;
+      }
+
+      .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .tag {
+        padding: 7px 10px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #ffffff;
         color: var(--muted);
-        border-top: 1px solid var(--line);
+        font-size: 0.86rem;
+        font-weight: 800;
+      }
+
+      .branch-table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+      }
+
+      .branch-table th,
+      .branch-table td {
+        padding: 14px 12px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .branch-table th {
+        color: var(--ink);
+        background: #f4f8fb;
+        font-size: 0.86rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      .branch-table td {
+        color: var(--muted);
+      }
+
+      .branch-table tr:last-child td {
+        border-bottom: 0;
+      }
+
+      .callout {
+        padding: 26px;
+        border-left: 5px solid var(--teal);
+        border-radius: 8px;
+        background: #e9f8f6;
+      }
+
+      .callout h3 {
+        margin-bottom: 8px;
+      }
+
+      .footer {
+        padding: 34px 0 44px;
+        color: #cfdae5;
+        background: var(--navy);
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .footer a {
+        color: #ffffff;
+        font-weight: 800;
+      }
+
+      @media (max-width: 900px) {
+        .hero-grid,
+        .two-col,
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 12px 0;
+        }
+
+        .navlinks {
+          justify-content: flex-start;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .wrap {
+          width: min(100% - 28px, 1180px);
+        }
+
+        .hero {
+          padding: 54px 0 38px;
+        }
+
+        .button {
+          width: 100%;
+        }
+
+        .branch-table {
+          font-size: 0.92rem;
+        }
       }
     </style>
   </head>
   <body>
-    <main>
+    <header class="topbar">
+      <div class="wrap nav">
+        <a class="brand" href="#top" aria-label="Inicio">
+          <strong>DevSecOps Multicloud Blueprint</strong>
+          <span>Carlos Crudo | Cloud, DevOps, Seguridad e IA</span>
+        </a>
+        <nav class="navlinks" aria-label="Navegacion principal">
+          <a href="#arquitectura">Arquitectura</a>
+          <a href="#gobierno">Gobierno</a>
+          <a href="#ramas">Ramas</a>
+          <a class="primary" href="https://github.com/ccrudolabs/DevSecOps-Multicloud-Blueprint">Repositorio</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
       <section class="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <p class="eyebrow">Blueprint enterprise para ambientes regulados</p>
+            <h1>DevSecOps multicloud con seguridad, trazabilidad y gobierno desde el repositorio.</h1>
+            <p class="lead">
+              Una referencia practica para estructurar plataformas Azure, AWS y GCP con IaC, CI/CD,
+              controles de seguridad, cumplimiento, ramas protegidas y documentacion profesional.
+            </p>
+            <div class="actions" aria-label="Acciones principales">
+              <a class="button primary" href="https://github.com/ccrudolabs/DevSecOps-Multicloud-Blueprint">Ver codigo</a>
+              <a class="button secondary" href="https://carloscrudo.com/">Blog personal</a>
+              <a class="button secondary" href="https://www.linkedin.com/in/carloscrudo/">LinkedIn</a>
+            </div>
+          </div>
+          <aside class="status-panel" aria-label="Estado de gobierno del repositorio">
+            <h2>Estado operativo</h2>
+            <ul class="status-list">
+              <li><span class="check">✓</span><span>GitHub Pages publicado desde <strong>main /docs</strong>.</span></li>
+              <li><span class="check">✓</span><span>Ramas <strong>main</strong>, <strong>qa</strong> y <strong>develop</strong> protegidas.</span></li>
+              <li><span class="check">✓</span><span>Pull requests y checks obligatorios antes de integrar cambios.</span></li>
+              <li><span class="check">✓</span><span>Workflow Terraform preparado para cambios documentales y ejemplos por modulo.</span></li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="arquitectura">
         <div class="wrap">
-          <p class="eyebrow">DevSecOps Multicloud Blueprint</p>
-          <h1>Arquitectura segura para operar infraestructura multicloud con criterio enterprise.</h1>
-          <p class="lead">
-            Repositorio de referencia para organizar controles de seguridad, cumplimiento, CI/CD, IAM,
-            documentacion tecnica y gobierno operativo en entornos Azure, AWS y GCP.
-          </p>
-          <div class="actions" aria-label="Enlaces principales">
-            <a class="button" href="../">Ver repositorio</a>
-            <a class="button secondary" href="https://carloscrudo.com/">Blog de Carlos Crudo</a>
-            <a class="button secondary" href="https://www.linkedin.com/in/carloscrudo/">LinkedIn</a>
+          <div class="section-head">
+            <h2>Mapa de capacidades para una plataforma DevSecOps multicloud.</h2>
+            <p>
+              El repositorio organiza dominios tecnicos que ayudan a tomar decisiones de arquitectura,
+              operar cambios con control y elevar la postura de seguridad desde el ciclo de vida del codigo.
+            </p>
+          </div>
+          <div class="grid">
+            <article class="card">
+              <span class="num">01</span>
+              <h3>Arquitectura y landing zone</h3>
+              <p>Separacion por ambientes, criterios multicloud, documentacion visual y componentes base para operar con escala.</p>
+            </article>
+            <article class="card">
+              <span class="num">02</span>
+              <h3>Seguridad e identidad</h3>
+              <p>IAM, secretos, revisiones de codigo, pruebas controladas y controles preventivos para reducir riesgo operativo.</p>
+            </article>
+            <article class="card">
+              <span class="num">03</span>
+              <h3>CI/CD e infraestructura</h3>
+              <p>Validaciones automatizadas, Terraform, pull requests, versionado y trazabilidad del cambio tecnico.</p>
+            </article>
+            <article class="card">
+              <span class="num">04</span>
+              <h3>Cumplimiento</h3>
+              <p>Checklist y evidencias orientadas a escenarios con auditoria, segregacion de funciones y controles verificables.</p>
+            </article>
+            <article class="card">
+              <span class="num">05</span>
+              <h3>Observabilidad</h3>
+              <p>Base conceptual para SIEM, alertas, eventos relevantes y seguimiento del estado de seguridad de la plataforma.</p>
+            </article>
+            <article class="card">
+              <span class="num">06</span>
+              <h3>Gobierno profesional</h3>
+              <p>Modelo de ramas, protecciones, responsables, documentacion y criterios para evolucionar el blueprint sin deuda innecesaria.</p>
+            </article>
           </div>
         </div>
       </section>
 
-      <section class="section">
+      <section class="section alt" id="gobierno">
+        <div class="wrap two-col">
+          <article class="wide-card">
+            <h2>Gobernanza aplicada</h2>
+            <p>
+              El repositorio queda preparado para trabajar solo o en equipo manteniendo disciplina profesional:
+              cambios por pull request, validaciones automaticas, ramas protegidas y conversacion resuelta antes de integrar.
+            </p>
+            <div class="tag-list" aria-label="Controles implementados">
+              <span class="tag">Protected branches</span>
+              <span class="tag">Required checks</span>
+              <span class="tag">Pull requests</span>
+              <span class="tag">No force push</span>
+              <span class="tag">No branch deletion</span>
+              <span class="tag">HTTPS Pages</span>
+            </div>
+          </article>
+          <article class="wide-card">
+            <h2>Perfil tecnico</h2>
+            <p>
+              Carlos Crudo presenta este blueprint como material de referencia profesional para DevOps,
+              Cloud, seguridad, automatizacion, Microsoft 365, Azure, GitHub, IaC y adopcion responsable de IA.
+            </p>
+            <p>
+              La propuesta combina criterio ejecutivo y detalle tecnico: suficiente para explicar decisiones,
+              revisar controles y usar el repositorio como base de mejora continua.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="ramas">
         <div class="wrap">
-          <div class="grid">
-            <article class="card">
-              <h2>Gobernanza de repositorio</h2>
-              <p>Ramas protegidas, pull requests, checks obligatorios, conversaciones resueltas y control de cambios.</p>
-            </article>
-            <article class="card">
-              <h2>Seguridad por capas</h2>
-              <p>Controles de codigo, secretos, IAM, cumplimiento, pruebas y trazabilidad para escenarios regulados.</p>
-            </article>
-            <article class="card">
-              <h2>CI/CD e IaC</h2>
-              <p>Validacion de Terraform y estructura preparada para evolucionar hacia pipelines por modulo.</p>
-            </article>
-            <article class="card">
-              <h2>Multicloud operativo</h2>
-              <p>Blueprint conceptual para Azure, AWS y GCP con separacion de entornos Dev, QA y Produccion.</p>
-            </article>
+          <div class="section-head">
+            <h2>Modelo de ramas y promocion de cambios.</h2>
+            <p>
+              El flujo mantiene trazabilidad por ambiente sin perder seguridad, incluso cuando una sola persona administra el repositorio.
+            </p>
           </div>
-          <div class="note">
-            Este sitio funciona como entrada publica del repositorio. La documentacion principal y los artefactos tecnicos se mantienen versionados en GitHub.
+          <div class="wide-card">
+            <table class="branch-table" aria-label="Modelo de ramas">
+              <thead>
+                <tr>
+                  <th>Rama</th>
+                  <th>Uso recomendado</th>
+                  <th>Control principal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>develop</strong></td>
+                  <td>Integracion temprana, evolucion de contenido y preparacion tecnica.</td>
+                  <td>PR, check Terraform y proteccion contra cambios directos riesgosos.</td>
+                </tr>
+                <tr>
+                  <td><strong>qa</strong></td>
+                  <td>Revision funcional, validacion documental y prepublicacion.</td>
+                  <td>Misma politica que main para evitar diferencias de seguridad.</td>
+                </tr>
+                <tr>
+                  <td><strong>main</strong></td>
+                  <td>Version estable, GitHub Pages y presentacion publica.</td>
+                  <td>Proteccion reforzada, checks verdes y despliegue Pages desde /docs.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="wrap">
+          <div class="callout">
+            <h3>Uso recomendado</h3>
+            <p>
+              Este blueprint puede utilizarse como repositorio demostrativo, material de estudio o punto de partida
+              para conversaciones de arquitectura. Para ambientes productivos, cada modulo Terraform debe tener su
+              propio backend, variables, validaciones, plan y controles de aprobacion adaptados al contexto real.
+            </p>
           </div>
         </div>
       </section>
     </main>
-    <footer>
-      <div class="wrap">Autor: Carlos Crudo. Material tecnico de estudio y referencia profesional.</div>
+
+    <footer class="footer">
+      <div class="wrap footer-grid">
+        <div>
+          <strong>DevSecOps Multicloud Blueprint</strong><br />
+          Autor: Carlos Crudo. Material tecnico de referencia profesional.
+        </div>
+        <div>
+          <a href="https://github.com/ccrudolabs">GitHub</a> ·
+          <a href="https://carloscrudo.com/">Blog</a> ·
+          <a href="https://www.linkedin.com/in/carloscrudo/">LinkedIn</a>
+        </div>
+      </div>
     </footer>
   </body>
 </html>
